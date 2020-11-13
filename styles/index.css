@@ -47,6 +47,18 @@ body {
   margin-right: 5px;
 }
 
+.search-icon {
+  color: white;
+}
+
+/* Hero Section */
+
+.netflix-highlight-carousel {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
 /* Footer */
 
 footer {

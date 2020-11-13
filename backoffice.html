@@ -22,15 +22,111 @@
       href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
     />
     <!-- My CSS -->
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles/backoffice.css" />
 
     <title>Netflix</title>
   </head>
   <body>
     <!-- Nav Bar -->
 
-    <nav></nav>
+    <nav class="navbar transparent navbar-inverse navbar-fixed-top">
+      <a class="navbar-brand ml-5 mt-4" href="index.html"
+        ><img src="assets/Netflix_logo.png" width="175"
+      /></a>
+      <div class="form-inline">
+        <a class="btn btn-danger btn-lg mr-5 mt-4 sign-in" href="index.html">
+          Browse
+        </a>
+      </div>
+    </nav>
     <!-- End of Nav Bar -->
+    <div class="main-content container">
+      <img src="assets/Neflex_signup_login_background.jpg" />
+      <div class="container intro-text-container">
+        <p class="aside-text">
+          Actually, very, very limited because I added them myself
+        </p>
+        <h1>
+          <span class="header-strikeout">Unlimited</span> films, TV programmes
+          and more.
+        </h1>
+        <h3>Watch anywhere. Cancel at any time.</h3>
+        <h6 class="mt-4">Ready to watch? Add your own movies now!</h6>
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <form onsubmit="handleSubmit(e)">
+              <div class="form-group">
+                <label for="name">Movie Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  placeholder="Write the movie title"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea
+                  class="form-control"
+                  id="description"
+                  rows="3"
+                  placeholder="Write about the movie here"
+                  required
+                ></textarea>
+              </div>
+              <!-- <div class="form-group">
+                <label for="category">Category</label>
+                <select multiple class="form-control" id="category">
+                  <option>drama</option>
+                  <option>fantasy</option>
+                  <option>comedy</option>
+                  <option>music</option>
+                  <option>TV Show</option>
+                </select>
+              </div> -->
+              <div class="form-group">
+                <label for="category">Category</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="category"
+                  placeholder="Write the movie category"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="imageUrl">Movie Poster</label>
+                <input
+                  type="url"
+                  class="form-control"
+                  id="imageUrl"
+                  placeholder="Link to a movie poster"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <button
+                  class="btn btn-danger"
+                  type="submit"
+                  value="Submit Movie"
+                >
+                  <span
+                    class="spinner-border spinner-border-sm d-none"
+                    role="status"
+                    aria-hidden="true"
+                    id="loadingSpinner"
+                  ></span>
+                  <!-- spinner is hidden by default because of d-none -->
+                  Submit New Movie
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -60,6 +156,6 @@
     ></script>
 
     <!-- My JS -->
-    <script src="js/backoffice.js"></script>
+    <script src="JS/backoffice.js"></script>
   </body>
 </html>
