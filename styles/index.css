@@ -73,3 +73,38 @@ footer a:hover {
   color: #f3f3f3;
   text-decoration: none;
 }
+
+/* Movie Cards */
+
+/* .trending.card { */
+/* max-width: 150px;
+  max-height: 150px; */
+/* border: 0;
+  box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.3);
+  margin-top: 1.5rem;
+}
+/*  */
+/* .card {
+  padding: 0px;
+  margin: 0.5rem;
+} */
+/* .trending.card > div {
+  position: absolute;
+  display: inline-block;
+  color: white;
+  text-align: center;
+  left: 0;
+  right: 0;
+  bottom: -2rem;
+} */
+.card > img {
+  width: 100%;
+  height: 100%;
+  background-attachment: fixed;
+  object-fit: cover;
+}
+
+.product-card p,
+.product-card h6 {
+  color: black;
+}

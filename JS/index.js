@@ -1,23 +1,28 @@
 const productResults = document.querySelector(".container-products");
 
       renderProducts = (products) => {
-        products.forEach((e) => {
+        products.forEach((movie) => {
           let listItem = document.createElement("div");
-          listItem.classList.add("col-md-4");
+          listItem.classList.add("col-md-3");
+          listItem.classList.add("mr-3");
+          listItem.classList.add("mb-3");
           listItem.classList.add("product-card");
-          listItem.innerHTML = `<img src="${e.imageUrl}" style="height:200px;"/>
-                    <div class="card-body" style="height: 400px; overflow-y: auto">
-                        <p class="card-text">
+          listItem.classList.add("card");
+          listItem.classList.add("trending");
+
+          listItem.innerHTML = `<img src="${movie.imageUrl}" style="height:250px;"/>
+                    <div class="card-body" style="height: 200px; overflow-y: auto">
+                        
                       <div>
-                        <div><h6 class ="product-name">${e.name}</h6></div>
-                        <div>${e.description}</div>
-                        <div><h6 class ="product-price">${e.category}</h6></div>
+                        <div><h6 class ="movie-name">${movie.name}</h6></div>
+                        <div><p>${movie.description}</p></div>
+                        <div><h6 class ="movie-category">${movie.category}</h6></div>
                       </div>
-                        </p>
+                        
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                          <a class="btn btn-info" href="detail.html?id=${
-                            e._id
+                          <a class="btn btn-info btn-danger" href="details.html?id=${
+                            movie._id
                           }">VIEW DETAILS</a>
                         </div>
 
@@ -28,14 +33,13 @@ const productResults = document.querySelector(".container-products");
                         </button>
                         <button
                             type="button"
-                            class="btn btn-sm btn-outline-secondary onclick=""
+                            class="btn btn-sm btn-outline-danger onclick=""
                         >
                         <span><i class="far fa-play-circle"></i></i></span>
                         </button>
                         </div>
-                        <small class="text-muted">Add on ${
-                          e.createdAt.split("T")[0]
-                        }</small>
+                        <small class="text-muted">Add on ${movie.createdAt.split("T")[0]}
+                        </small>
 
                     </div>
                     </div>`;
@@ -52,9 +56,13 @@ const productResults = document.querySelector(".container-products");
         productResults.innerHTML = "";
         // productResults.querySelectorAll("*").forEach((node) => node.remove()); //same as above
       };
+      
+//   document.querySelector('#category').addEventListener('change', () => {
+//           getProducts(documnet.querySelector('#category').value)
+//       })
 
-      const getProducts = async () => {
-        const url = "https://striveschool-api.herokuapp.com/api/movies/";
+      const getProducts = async (category) => {
+        const url = "https://striveschool-api.herokuapp.com/api/movies/"+category;
         try {
           productLibrary = await fetch(url, {
             method: "GET",
@@ -63,6 +71,8 @@ const productResults = document.querySelector(".container-products");
                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzRkMjRiY2RlMTAwMTc2MTZhODMiLCJpYXQiOjE2MDUwOTI1NjIsImV4cCI6MTYwNjMwMjE2Mn0.arJqVkpzT0MeHAgQP3AYhkG9rGTJHbVwdiXIuPiok20",
             },
           }).then((res) => res.json());
+          console.log(productLibrary)
+       
           renderProducts(productLibrary);
         } catch (error) {
           console.log(error);
@@ -94,5 +104,5 @@ const productResults = document.querySelector(".container-products");
       };
 
       window.onload = async () => {
-        getProducts();
+        getProducts('Romance');
       };

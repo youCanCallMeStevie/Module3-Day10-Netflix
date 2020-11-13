@@ -30,7 +30,7 @@
     <!-- Nav Bar -->
 
     <nav class="navbar navbar-expand-lg navbar-dark">
-      <a class="navbar-brand my-3 mx-4" href="index.html"
+      <a class="navbar-brand my-3 mx-4" href="signin.html"
         ><img src="assets/Netflix_logo.png" width="125"
       /></a>
 
@@ -102,9 +102,9 @@
               >
               <a href="profile.html" class="dropdown-item">Manage Profiles</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="backoffice.html">Back Office</a>
-              <a class="dropdown-item" href="accounts.html">Accounts</a>
-              <a class="dropdown-item" href="intro.html">Sign out</a>
+              <a href="account.html" class="dropdown-item">Account</a>
+              <a class="dropdown-item" href="#">Help Center</a>
+              <a class="dropdown-item" href="intro.html">Sign out of Netflix</a>
             </div>
           </div>
         </div>
@@ -185,46 +185,23 @@
     <!-- Movie Grid -->
 
     <div class="container">
-      <h2 class="mt-4 text-white">
-        MOVIES
-        <div class="btn-group">
-          <button
-            type="button"
-            class="btn dropdown-toggle btn-outline-dark"
-            style="color: white; background: #0f171e"
-            data-toggle="dropdown"
-            data-display="static"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Genere
-          </button>
-          <div
-            class="dropdown-menu dropdown-menu-lg-right"
-            style="color: white; background: #0f171e"
-          >
-            <button class="dropdown-item" type="button" style="color: white">
-              Action
-            </button>
-            <button
-              class="dropdown-item"
-              type="button"
-              style="color: white"
-              onclick="getProducts('Horror')"
-            >
-              Horror
-            </button>
-            <button class="dropdown-item" type="button" style="color: white">
-              Romance
-            </button>
-          </div>
-        </div>
-      </h2>
-      <h3 class="mt-2 text-white">My List</h3>
+      <div class="my-5" id="details"></div>
       <div
         class="row no-gutters row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4"
         id="product-list"
       ></div>
+      <input
+        type="button"
+        class="btn btn-info"
+        value="EDIT"
+        onclick="handleEdit()"
+      />
+      <input
+        type="button"
+        class="btn btn-danger"
+        value="DELETE"
+        onclick="handleDelete()"
+      />
     </div>
 
     <!-- Footer -->
@@ -312,6 +289,6 @@
     ></script>
 
     <!-- My JS -->
-    <script src="JS/index.js"></script>
+    <script src="JS/details.js"></script>
   </body>
 </html>

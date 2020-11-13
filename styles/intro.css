@@ -80,3 +80,8 @@ body {
   border: 1px;
   border-color: whitesmoke;
 }
+
+a:hover img {
+  border-color: white;
+  border: 3px;
+}
