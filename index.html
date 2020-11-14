@@ -34,11 +34,7 @@
         ><img src="assets/Netflix_logo.png" width="125"
       /></a>
 
-      <div
-        class="collapse navbar-collapse"
-        id="navbarSupportedContent"
-        style="color: white"
-      >
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item mr-3 active">
             <a class="nav-link" href="#"
@@ -59,22 +55,24 @@
           </li>
         </ul>
         <div class="form-inline my-2 my-lg-0">
-          <form class="form-inline">
+          <div class="form-inline search-container">
             <button class="my-2 my-sm-0 transparent search-btn" type="submit">
-              <i class="fas fa-search search-icon fa-lg"></i>
+              <i class="fas fa-search search-icon mr-3 fa-lg"></i>
             </button>
-            <input
+            <!-- <input
               class="form-control mr-sm-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
-            />
-          </form>
-
+            /> -->
+          </div>
+          <div class="bell-container">
+            <i class="fa fa-bell mr-3 fa-lg"></i>
+          </div>
           <span class="avatar mr-3"
             ><img src="assets/red-netflix-smile.png"
           /></span>
-          <div class="dropdown">
+          <div class="dropdown dropdown-navbar-account">
             <div
               class="dropdown-toggle transparent"
               data-toggle="dropdown"
@@ -184,7 +182,7 @@
 
     <!-- Movie Grid -->
 
-    <div class="container">
+    <div class="container-fluid">
       <h2 class="mt-4 text-white">
         MOVIES
         <div class="btn-group">
@@ -222,7 +220,7 @@
       </h2>
       <h3 class="mt-2 text-white">My List</h3>
       <div
-        class="row no-gutters row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4"
+        class="row no-gutters row-cols-sm-3row-cols-lg-2"
         id="product-list"
       ></div>
     </div>

@@ -34,17 +34,17 @@ body {
 
 /* Nav Avatars */
 .avatar img {
-  width: 55px;
-  height: 55px;
+  width: 50px;
+  height: 50px;
   border-radius: 5px;
 }
 
 .mini-avatar img {
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   border-radius: 5px;
   margin-left: 0px;
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 .search-icon {

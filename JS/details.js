@@ -16,7 +16,7 @@ window.onload = async () => {
       },
     });
 
-    let movie = await response.json(); // transforming the response body in an usable object, asyncronous operation!
+    let movie = await response.json(); 
     let element = document.createElement("p");
           element.innerHTML = `${movie.name} : ${movie.description}`;
 
@@ -40,7 +40,7 @@ const handleDelete = async () => {
     if (response.ok) {
       // checking the ok property which stores the successful result of the operation
       alert("Product deleted successfully");
-      location.assign("index.html");
+      window.location.assign("index.html");
     } else {
       alert("Something went wrong!");
     }
