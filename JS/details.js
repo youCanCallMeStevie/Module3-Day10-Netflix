@@ -1,39 +1,46 @@
+const productResults = document.querySelector(".container-products");
 const url = "https://striveschool-api.herokuapp.com/api/movies/";
+const header =
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzRkMjRiY2RlMTAwMTc2MTZhODMiLCJpYXQiOjE2MDUwOTI1NjIsImV4cCI6MTYwNjMwMjE2Mn0.arJqVkpzT0MeHAgQP3AYhkG9rGTJHbVwdiXIuPiok20";
 
-const productList = document.querySelector("#product-list");
+// const id = null
 
-
+let urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get("id");
+const category = urlParams.get("category");
 window.onload = async () => {
-  let urlParams = new URLSearchParams(window.location.search);
-  id = urlParams.get("id");
-
+  // let urlParams = new URLSearchParams(window.location.search);
+  // const id = urlParams.get("id");
+  // const category = urlParams.get('category')
   try {
-    let response = await fetch(url + id, {
+    let response = await fetch(url + category, {
       method: "GET",
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzRkMjRiY2RlMTAwMTc2MTZhODMiLCJpYXQiOjE2MDUwOTI1NjIsImV4cCI6MTYwNjMwMjE2Mn0.arJqVkpzT0MeHAgQP3AYhkG9rGTJHbVwdiXIuPiok20",
+        Authorization: header,
       },
     });
 
-    let movie = await response.json(); 
+    let movies = await response.json();
+    let movie = movies.find((movie) => movie._id === id);
     let element = document.createElement("p");
-          element.innerHTML = `${movie.name} : ${movie.description}`;
+    element.innerHTML = `${movie.name} : ${movie.description}`;
 
-          document.querySelector("#details").appendChild(element);
-        } catch (error) {
-          //   alert("Something went wrong");
-          console.log(error);
-        }
-      };
+    document.querySelector("#details").appendChild(element);
+  } catch (error) {
+    //   alert("Something went wrong");
+    console.log(error);
+  }
+};
 
 const handleDelete = async () => {
+  // let urlParams = new URLSearchParams(window.location.search);
+  // const id = urlParams.get("id");
+  // const category = urlParams.get('category')
   try {
     const response = await fetch(url + id, {
       method: "DELETE",
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzRkMjRiY2RlMTAwMTc2MTZhODMiLCJpYXQiOjE2MDUwOTI1NjIsImV4cCI6MTYwNjMwMjE2Mn0.arJqVkpzT0MeHAgQP3AYhkG9rGTJHbVwdiXIuPiok20",
+        Authorization: header,
       },
     });
 
@@ -50,5 +57,5 @@ const handleDelete = async () => {
 };
 
 const handleEdit = () => {
-  window.location.href = "backoffice.html?id=" + id;
+  window.location.href = `backoffice.html?id=${id}&category=${category}`;
 };

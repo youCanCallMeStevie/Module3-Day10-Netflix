@@ -54,7 +54,7 @@ body {
 /* Hero Section */
 
 .netflix-highlight-carousel {
-  position: absolute;
+  position: relative;
   top: 0px;
   left: 0px;
 }

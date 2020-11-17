@@ -1,4 +1,5 @@
 const url = "https://striveschool-api.herokuapp.com/api/movies/";
+const header = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzRkMjRiY2RlMTAwMTc2MTZhODMiLCJpYXQiOjE2MDUwOTI1NjIsImV4cCI6MTYwNjMwMjE2Mn0.arJqVkpzT0MeHAgQP3AYhkG9rGTJHbVwdiXIuPiok20"
 
 window.onload = async () => {
   let urlParams = new URLSearchParams(window.location.search);
@@ -8,7 +9,7 @@ window.onload = async () => {
       method: "GET",
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzRkMjRiY2RlMTAwMTc2MTZhODMiLCJpYXQiOjE2MDUwOTI1NjIsImV4cCI6MTYwNjMwMjE2Mn0.arJqVkpzT0MeHAgQP3AYhkG9rGTJHbVwdiXIuPiok20",
+          header,
           "Content-Type": "application/json",
         },
     });
@@ -17,7 +18,7 @@ window.onload = async () => {
     console.log(movie);
     document.getElementById("name").value = movie.name;
     document.getElementById("description").value = movie.description;
-    document.getElementById("category").value = movie.category;
+    document.getElementById("categories").value = movie.category;
     document.getElementById("imageUrl").value = movie.imageUrl;
   }
 };
@@ -33,7 +34,7 @@ const submitMovie = async () => {
     // gathering the data from the form, field by field
     name: document.querySelector("#name").value,
     description: document.querySelector("#description").value,
-    category: document.querySelector("#category").value,
+    category: document.querySelector("#categories").value,
     imageUrl: document.querySelector("#imageUrl").value,
   };
 
@@ -41,13 +42,13 @@ const submitMovie = async () => {
     let response;
 
     if (id) {
-      response = await fetch(url + id, {
+      response = await fetch(url + id + category, {
         method: "PUT", 
         body: JSON.stringify(newMovie), // we need to stringify the JS object in order to send it
         headers: new Headers({
           // we need also to declare the content type
           Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzRkMjRiY2RlMTAwMTc2MTZhODMiLCJpYXQiOjE2MDUwOTI1NjIsImV4cCI6MTYwNjMwMjE2Mn0.arJqVkpzT0MeHAgQP3AYhkG9rGTJHbVwdiXIuPiok20",
+          header,
           "Content-Type": "application/json",
         }),
       });

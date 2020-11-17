@@ -1,6 +1,11 @@
 const productResults = document.querySelector(".container-products");
+const url = "https://striveschool-api.herokuapp.com/api/movies/";
+const header =
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzRkMjRiY2RlMTAwMTc2MTZhODMiLCJpYXQiOjE2MDUwOTI1NjIsImV4cCI6MTYwNjMwMjE2Mn0.arJqVkpzT0MeHAgQP3AYhkG9rGTJHbVwdiXIuPiok20";
 
 renderProducts = (products) => {
+  const productList = document.querySelector("#product-list");
+  productList.innerHTML = "";
   products.forEach((movie) => {
     let listItem = document.createElement("div");
     listItem.classList.add("col");
@@ -25,7 +30,7 @@ renderProducts = (products) => {
                         <div class="btn-group">
                           <a class="btn btn-info btn-danger" href="details.html?id=${
                             movie._id
-                          }">VIEW DETAILS</a>
+                          }&category=${movie.category}">VIEW DETAILS</a>
                         </div>
 
                         <button
@@ -51,7 +56,7 @@ renderProducts = (products) => {
   });
 };
 
-const productList = document.querySelector("#product-list");
+// const productList = document.querySelector("#product-list");
 
 let productLibrary = [];
 
@@ -61,20 +66,122 @@ const clearContainer = (productList) => {
   // productResults.querySelectorAll("*").forEach((node) => node.remove()); //same as above
 };
 
-let category = document
-  .querySelector("#category")
-  .addEventListener("change", () => {
-    getProducts(document.querySelector("#category").value);
-  });
+// document.getElementById("categories")
+//   .addEventListener("change", () => {
+//     getProducts(document.querySelector("#category").value);
+//   });
 
-const getProducts = async (category) => {
-  const url = "https://striveschool-api.herokuapp.com/api/movies/" + category;
+//   <button
+//   class="dropdown-item"
+//   type="button"
+//   style="color: white"
+//   onclick=""
+// >
+//   Horror
+// </button>
+
+const fetchCategories = async () => {
+  try {
+    const result = await fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: header,
+      },
+    });
+    const categories = await result.json();
+    console.log(categories);
+    let data = await Promise.all(
+      categories.map(async (category) => {
+        const result = await fetch(url + category, {
+          method: "GET",
+          headers: {
+            Authorization: header,
+          },
+        });
+        return await result.json()
+      })
+    );
+    console.log(data)
+    // let listItem = document.createElement("div");
+    // listItem.classList.add("col");
+    // listItem.classList.add("mr-3");
+    // listItem.classList.add("mb-3");
+    // listItem.classList.add("product-card");
+    // listItem.classList.add("card");
+    // listItem.classList.add("trending");
+  document.querySelector(".movie-rows").innerHTML = data.map((arr, index )=> `<h3 class="mt-2 text-white">${data[index][0].category}</h3>
+  <div
+    class="row no-gutters row-cols-lg-5"
+    id="product-list"
+  >${arr.map(movie => `<div class="col mr-3 product-card card trending">
+  <img src="${movie.imageUrl}" style="height:250px;"/>
+<div class="card-body" style="height: 200px; overflow-y: auto">
+    
+  <div>
+    <div><h6 class ="movie-name">${movie.name}</h6></div>
+    <div><p>${movie.description}</p></div>
+    <div><h6 class ="movie-category">${
+      movie.category
+    }</h6></div>
+  </div>
+    
+<div class="d-flex justify-content-between align-items-center">
+    <div class="btn-group">
+      <a class="btn btn-info btn-danger" href="details.html?id=${
+        movie._id
+      }&category=${movie.category}">VIEW DETAILS</a>
+    </div>
+
+    <button
+        type="button"
+        class="btn btn-sm btn-outline-secondary btnHide" onclick="hideToggle()"
+    >Hide
+    </button>
+    <button
+        type="button"
+        class="btn btn-sm btn-outline-danger onclick=""
+    >
+    <span><i class="far fa-play-circle"></i></i></span>
+    </button>
+    </div>
+    <small class="text-muted">Add on ${
+      movie.createdAt.split("T")[0]
+    }
+    </small>
+
+</div>
+</div>`).join('')}</div>
+  `
+  
+  ).join("")
+     
+
+    document.querySelector(".category-dropdown").innerHTML = categories
+      .map(
+        (category) => `  <button
+   class="dropdown-item"
+   type="button"
+   style="color: white"
+   onclick="getProducts(this)"
+ >
+   ${category}
+ </button>
+   `
+      )
+      .join("");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getProducts = async (event) => {
+  const url =
+    "https://striveschool-api.herokuapp.com/api/movies/" + event.innerText;
   try {
     productLibrary = await fetch(url, {
       method: "GET",
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzRkMjRiY2RlMTAwMTc2MTZhODMiLCJpYXQiOjE2MDUwOTI1NjIsImV4cCI6MTYwNjMwMjE2Mn0.arJqVkpzT0MeHAgQP3AYhkG9rGTJHbVwdiXIuPiok20",
+        Authorization: header,
       },
     }).then((res) => res.json());
     console.log(productLibrary);
@@ -95,9 +202,9 @@ const handleProductSearch = () => {
   renderProducts(filteredList);
 };
 
-const searchButton = document.querySelector(".search-btn");
-searchButton.addEventListener("click", () => handleProductSearch());
-input.addEventListener("keyup", () => handleProductSearch());
+// const searchButton = document.querySelector(".search-btn");
+// searchButton.addEventListener("click", () => handleProductSearch());
+// input.addEventListener("keyup", () => handleProductSearch());
 
 const hideToggle = () => {
   let allCards = document.querySelectorAll(".product-card");
@@ -110,5 +217,5 @@ const hideToggle = () => {
 };
 
 window.onload = async () => {
-  getProducts();
+  fetchCategories();
 };
